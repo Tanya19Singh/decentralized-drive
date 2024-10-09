@@ -1,4 +1,10 @@
 .App {
+
+  position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
   text-align: center;
 }
 
@@ -38,13 +44,72 @@
 }
 html {
   height: 100%;
+  padding:0;
+  margin:0;
 }
 
 body {
+  padding:0;
   margin: 0;
 }
+ /* body {
+  background-color: #fee440;
+}
+svg {
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+}
 
-.bg {
+
+.links {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 18px;
+  font-family: sans-serif;
+}
+a {
+  text-decoration: none;
+  color: black;
+  margin-left: 1em;
+}
+a:hover {
+  text-decoration: underline;
+}
+a img.icon {
+  display: inline-block;
+  height: 1em;
+  margin: 0 0 -0.1em 0.3em;
+}
+@keyframes rotate {
+  0% {
+           transform: rotate(0deg);
+       }
+       100% {
+           transform: rotate(360deg);
+       }
+   }
+   .out-top {
+       animation: rotate 20s linear infinite;
+       transform-origin: 13px 25px;
+   }
+   .in-top {
+       animation: rotate 10s linear infinite;
+       transform-origin: 13px 25px;
+   }
+   .out-bottom {
+       animation: rotate 25s linear infinite;
+       transform-origin: 84px 93px;
+   }
+   .in-bottom {
+       animation: rotate 15s linear infinite;
+       transform-origin: 84px 93px;
+   } */
+ /* .bg {
   animation: slide 3s ease-in-out infinite alternate;
   background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
   bottom: 0;
@@ -63,10 +128,10 @@ body {
 
 .bg3 {
   animation-duration: 5s;
-}
-
+} */
+ 
 .content {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(208, 58, 58, 0.8);
   border-radius: 0.25em;
   box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
@@ -96,9 +161,7 @@ h1 {
   margin: 0;
   box-sizing: border-box;
 }
-body {
-  height: 900px;
-}
+
 header {
   text-align: center;
   width: 100%;
@@ -132,7 +195,9 @@ p {
 .share {
   padding: 16px;
   margin-top: 10px;
-  vertical-align: center;
+  margin-left:10px;
+  position:relative;
+  /* vertical-align: center; */
   background: #f44336;
   width: 70px;
   height: 45px;
@@ -141,7 +206,7 @@ p {
   border-radius: 4px;
   font-size: 13px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  z-index: -1;
+  z-index: 1;
 }
 
 .share:hover {

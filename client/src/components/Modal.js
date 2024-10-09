@@ -3,8 +3,15 @@ import "./Modal.css";
 const Modal = ({ setModalOpen, contract }) => {
   const sharing = async () => {
     const address = document.querySelector(".address").value;
-    await contract.allow(address);
-    setModalOpen(false);
+    try
+    {await contract.allow(address);
+    console.log(address);
+    setModalOpen(false);}
+    catch(e)
+    {
+        console.error(e);
+        alert("can't grant access");
+    }
   };
   useEffect(() => {
     const accessList = async () => {

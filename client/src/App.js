@@ -1,16 +1,38 @@
 import Upload from "./artifacts/contracts/Upload.sol/Upload.json";
-import { useState, useEffect } from "react";
+import { useState, useRef,useEffect } from "react";
 import { ethers } from "ethers";
 import FileUpload from "./components/FileUpload";
 import Display from "./components/Display";
 import Modal from "./components/Modal";
 import "./App.css";
-
 function App() {
   const [account, setAccount] = useState("");
   const [contract, setContract] = useState(null);
   const [provider, setProvider] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [vantaEffect, setVantaEffect] = useState(null); // To store Vanta instance
+  const vantaRef = useRef(null); // Reference to the div element
+
+  // Use useEffect to initialize Vanta after component mounts
+  useEffect(() => {
+    if (window.VANTA&&!vantaEffect) {
+      setVantaEffect(
+        window.VANTA.CLOUDS({
+          el: vantaRef.current,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          backgroundColor: 0x10101
+        })
+      );
+    }
+    return () => {
+      if (vantaEffect) vantaEffect.destroy(); // Cleanup the effect on unmount
+    };
+  }, [vantaEffect]);
+
 
   useEffect(() => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -28,7 +50,7 @@ function App() {
         const signer = provider.getSigner();
         const address = await signer.getAddress();
         setAccount(address);
-        let contractAddress = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8";
+        let contractAddress = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9";
 
         const contract = new ethers.Contract(
           contractAddress,
@@ -56,12 +78,13 @@ function App() {
       )}
 
       <div className="App">
-        <h1 style={{ color: "white" }}>Gdrive 3.0</h1>
-        <div class="bg"></div>
-        <div class="bg bg2"></div>
-        <div class="bg bg3"></div>
+      <div
+      ref={vantaRef}
+      style={{ height: "100%", width: "100%" }} // Full-screen container for Vanta effect
+    >
 
-        <p style={{ color: "white" }}>
+        <h1 style={{ color: "#5B42F3" }}>Pic-Cloud</h1>
+              <p style={{ color: "#5B42F3" }}>
           Account : {account ? account : "Not connected"}
         </p>
         <FileUpload
@@ -70,6 +93,7 @@ function App() {
           contract={contract}
         ></FileUpload>
         <Display contract={contract} account={account}></Display>
+      </div>
       </div>
     </>
   );
